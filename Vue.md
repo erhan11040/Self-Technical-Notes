@@ -10,6 +10,8 @@ upgrade projects to vue3	= vue upgrade --next
 
 add ts 						= vue add typescript
 
+Create legacy project       = npm install vue or vue init create "project"
+
 
 -Composition api what is new with vue3 : 
 
