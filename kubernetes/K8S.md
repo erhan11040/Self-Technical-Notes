@@ -1,18 +1,4 @@
-KUBERNETES NOTES
-
-az login
-//login to azure
-
-az account set --subscription "Project Azure Subscription"
-//set azure subscription
-
-az aks get-credentials -a --resource-group rg-dev-project --name aks-dev-proj
-
-kubectl config set-context --current --namespace=dev
-///set Name space above 
-
-az aks browse --resource-group rg-dev-proj --name aks-dev-proj
-//open dashboard
+---KUBERNETES NOTES & commands---
 
 kubectl get services --namespace=dev
 //list of services
@@ -29,8 +15,10 @@ kubectl exec --stdin --tty nginx-ingress-controller-xxxx-xx -- /bin/bash
 kubectl exec -i -t dev-proj-fe-xxxxx-xxxx --container dev-proj-fe -- /bin/bash
 //get console if pod has more then1 container
 
-kubectl get nodes -o wide
+kubectl scale --replicas=3 deployment/basic-nodejs --namespace deneme
+//scale up pods 
 
+kubectl get nodes -o wide
 
 kubectl run my-nginx --image=nginx --replicas=2 --port=80
 //The kubectl run line above will create two nginx pods listening on port 80. 
@@ -50,57 +38,24 @@ kubectl create -f basic-deployment.yaml
 
 kubectl expose deployment basic-deployment --port=80 --type=LoadBalancer
 //exposed to internet
-TERMİNOLOJİ
+
 pods=>group of container
-Node=> container
+Node=> server instance
 Namespace=> group of pods
-
-
-helm install nginx-ingress stable/nginx-ingress --namespace dev \--set controller.replicaCount=2 \--set controller.nodeSelector."beta\.kubernetes\.io/os"=linux \--set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
-
-helm uninstall nginx-ingress --namespace test
 
 kubectl delete -f hw1.yaml --namespace newerhan
 kubectl apply -f hw1.yaml --namespace dev
-kubectl apply -f hw2.yaml --namespace dev
-kubectl apply -f ingress-dev.yaml --namespace dev
-
-kubectl delete -f hw2.yaml --namespace dev
-kubectl delete -f ingress.yaml --namespace dev
 kubectl delete namespace dev
-
 kubectl create namespace newproj
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+kubectl delete clusterrole nginx-ingress
+kubectl delete clusterrolebinding nginx-ingress
 
-helm install nginx-ingress stable/nginx-ingress --namespace dev  --set controller.replicaCount=2 --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
 
-KIND=deployment
-NAME=my-app-staging
-RELEASE=staging
-NAMESPACE=newerhan
 kubectl annotate deployment stable meta.helm.sh/release-name=staging
 kubectl annotate  meta.helm.sh/release-namespace=newproj
 kubectl label deployment my-app-staging app.kubernetes.io/managed-by=Helm
 
-kubectl delete clusterrole nginx-ingress
-
-kubectl delete clusterrolebinding nginx-ingress
-helm uninstall nginx-ingress --namespace uat
-
-
-helm install nginx-ingress stable/nginx-ingress --namespace dev -f internal.yaml --set controller.replicaCount=2 --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
-
-helm install nginx-ingress stable/nginx-ingress \
-    --namespace ingress-basic \
-    -f internal-ingress.yaml \
-    --set controller.replicaCount=2 \
-    --set controller.nodeSelector."beta\.kubernetes\.io/os"=linux \
-    --set defaultBackend.nodeSelector."beta\.kubernetes\.io/os"=linux
-
-    kubectl edit svc   servn 
-
-    az aks list --resource-group rg-dev-proj
-
+kubectl edit svc   servn 
 
 kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 //update dashboard priviligences
@@ -108,7 +63,6 @@ kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-adm
 //skip login
 kubectl edit deployment/kubernetes-dashboard --namespace=kube-system
 //add this=>  --enable-skip-login
-
 
 ------TO GET BEARER TOKEN INCASE OF NEEED----
 kubectl -n kube-system get secret
@@ -120,14 +74,4 @@ deployment-controller-token-s8rrv
 service-account-controller-token-xxx
 kubectl config set-credentials cluster-admin --token=
 
-
 kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | awk '/^deployment-controller-token-/{print $1}') | awk '$1=="token:"{print $2}'
-
-az network public-ip create  --resource-group rg-dev-proj  --name aks-test-ip  --allocation-method static
-
-az network public-ip create  --resource-group xxx_rg-dev-proj_aks-dev-proj_xxxxx  --name aks-test-ip  --allocation-method static
-
-kubectl apply -f engress.yaml --namespace test
-kubectl delete -f engress.yaml --namespace test
-
-curl ifconfig.me. //get ip from server
