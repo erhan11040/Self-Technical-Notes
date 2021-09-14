@@ -12,6 +12,9 @@ kubectl get pod mypod
 kubectl exec --stdin --tty nginx-ingress-controller-xxxx-xx -- /bin/bash
 //get console
 
+kubectl config set-context --current --namespace=dev
+///set Name space above 
+
 kubectl exec -i -t dev-proj-fe-xxxxx-xxxx --container dev-proj-fe -- /bin/bash
 //get console if pod has more then1 container
 
