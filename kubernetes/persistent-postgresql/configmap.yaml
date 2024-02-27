@@ -1,10 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: postgres-config
+  name: postgres-erp-config
   labels:
-    app: postgres
+    app: postgres-erp
 data:
-  POSTGRES_DB: testdb
-  POSTGRES_USER: testadmin
-  POSTGRES_PASSWORD: test123
+  POSTGRES_DB: BissERPDB
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: biss
+  PGDATA: /data/pgdata

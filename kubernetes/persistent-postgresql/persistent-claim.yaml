@@ -1,9 +1,9 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgres-pv-claim
+  name: postgres-erp-pv-claim
   labels:
-    app: postgres
+    app: postgres-erp
 spec:
   storageClassName: manual
   accessModes:

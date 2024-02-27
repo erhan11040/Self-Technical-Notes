@@ -3,11 +3,10 @@ kind: Service
 metadata:
   name: postgres
   labels:
-    app: postgres
+    app: postgres-erp
 spec:
   type: NodePort
   ports:
    - port: 5432
   selector:
-   app: postgres
-  type: LoadBalancer
+   app: postgres-erp-dep

@@ -1,20 +1,20 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: basic-nodejs 
+  name: erp-frontend
 spec:
   selector:
     matchLabels:
-      app: basic-nodejs 
+      app: erp-frontend
   replicas: 1
   template:
     metadata:
       labels:
-        app: basic-nodejs 
+        app: erp-frontend
     spec:
       containers:
-        - name: basic-nodejs 
-          image: basic-nodejs-minikube
+        - name: erp-frontend
+          image: erp-frontend:latest
           ports:
-          - containerPort: 3000
+          - containerPort: 80
           imagePullPolicy: Never

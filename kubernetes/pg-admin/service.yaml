@@ -5,7 +5,8 @@ metadata:
   labels:
     app: pgadmin
 spec:
-  type: NodePort
+  loadBalancerIP: 20.82.15.87
+  type: LoadBalancer
   ports:
    - port: 80
   selector:

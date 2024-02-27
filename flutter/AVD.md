@@ -5,3 +5,4 @@ run emulator -avd -list-avds
 run emulator @EMULATOR_NAME
 EG: emulator @Pixel_3a_API_30_x86
 or ./emulator -avd Pixel_3a_API_30_x86
+add -no-snapshot-load for cold boot

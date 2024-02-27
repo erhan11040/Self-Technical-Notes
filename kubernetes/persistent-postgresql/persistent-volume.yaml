@@ -1,10 +1,10 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: postgres-pv-volume
+  name: postgres-erp-pv-volume
   labels:
     type: local
-    app: postgres
+    app: postgres-erp
 spec:
   storageClassName: manual
   capacity:

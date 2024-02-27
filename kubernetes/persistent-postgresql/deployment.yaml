@@ -1,30 +1,30 @@
 apiVersion : apps/v1
 kind: Deployment
 metadata:
-  name: postgres
+  name: postgres-erp
 spec:
   selector:
       matchLabels:
-        app: postgres-dep
+        app: postgres-erp-dep
   replicas: 1
   template:
     metadata:
       labels:
-        app: postgres-dep
+        app: postgres-erp-dep
     spec:
       containers:
-        - name: postgres
-          image: postgres:10.4
+        - name: postgres-erp
+          image: postgres:latest
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432
           envFrom:
             - configMapRef:
-                name: postgres-config
+                name: postgres-erp-config
           volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: postgredb
+            - mountPath: /data
+              name: postgredb-erp
       volumes:
-        - name: postgredb
+        - name: postgredb-erp
           persistentVolumeClaim:
-            claimName: postgres-pv-claim
+            claimName: postgres-erp-pv-claim

@@ -1,9 +1,12 @@
 docker NOtes
 Node example with ts
-
 --commands--
+//get container ip address
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container-name
 
 docker build . -t <your username>/node-web-app //build current directory
+docker build starting/directory -f location/to/dockerfile -t imagename
+
 docker run -p 8000:8000 -d <your username>/node-web-app
 
 docker images //list images

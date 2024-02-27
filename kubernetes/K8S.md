@@ -12,15 +12,19 @@ kubectl get pod mypod
 kubectl exec --stdin --tty nginx-ingress-controller-xxxx-xx -- /bin/bash
 //get console
 
-kubectl config set-context --current --namespace=dev
+kubectl config set-context --current --namespace=cert-manager
 ///set Name space above 
+
+kubectl delete all --all
+//deletes all resources under current namespace
+
 
 kubectl exec -i -t dev-proj-fe-xxxxx-xxxx --container dev-proj-fe -- /bin/bash
 //get console if pod has more then1 container
 
 kubectl scale --replicas=3 deployment/basic-nodejs --namespace deneme
 //scale up pods 
-
+kubectl scale statefulsets kafka --replicas=2
 kubectl get nodes -o wide
 
 kubectl run my-nginx --image=nginx --replicas=2 --port=80
@@ -39,7 +43,7 @@ kubectl create -f basic-pod.yaml
 kubectl create -f basic-deployment.yaml
 //deploy pod
 
-kubectl expose deployment basic-deployment --port=80 --type=LoadBalancer
+kubectl expose deployment basic-deployment --port=80 --type=LoadBalancer --name=name
 //exposed to internet
 
 pods=>group of container
